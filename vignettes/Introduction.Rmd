@@ -1,6 +1,6 @@
 ---
-title: "Introduction to WorldbankAnalysis Package"
-author: "Your Name"
+title: "Introduction to WorldbankAnalysis"
+author: "Guan Gui"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -46,7 +46,7 @@ indicator_urls <- list(
 )
 
 # Fetch and merge data
-merged_data <- fetch_merge_indicators(indicator_urls = indicator_urls, num_cores = 4, start_year = 2015, end_year = 2022)
+merged_data <- fetch_merge_indicators(indicator_urls = indicator_urls, num_cores = 2, start_year = 2015, end_year = 2022)
 
 # Display a preview of the merged data
 head(merged_data)

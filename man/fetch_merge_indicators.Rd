@@ -6,7 +6,7 @@
 \usage{
 fetch_merge_indicators(
   indicator_urls,
-  num_cores = parallel::detectCores() - 1,
+  num_cores = 1,
   start_year = 2015,
   end_year = 2022
 )

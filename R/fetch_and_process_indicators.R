@@ -6,7 +6,7 @@
 #' @param num_cores Number of cores to use for parallel processing. Defaults to all available cores minus one.
 #' @return A list of tibbles with processed data for each indicator.
 #' @export
-fetch_and_process_indicators <- function(indicator_urls, num_cores = parallel::detectCores() - 1) {
+fetch_and_process_indicators <- function(indicator_urls, num_cores = 1) {
   # Parallel fetching of indicator data
   cl <- parallel::makeCluster(num_cores)
 

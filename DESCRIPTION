@@ -21,9 +21,7 @@ Imports:
     ggplot2,
     parallel,
     zoo
-Suggests: 
-    knitr,
-    rmarkdown
 VignetteBuilder: knitr
+Suggests: knitr, rmarkdown
 URL: https://github.com/ggui6809/WorldbankAnalysis
 BugReports: https://github.com/ggui6809/WorldbankAnalysis/issues
