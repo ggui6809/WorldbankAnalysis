@@ -30,12 +30,16 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "rcmdcheck"))
+          install.packages(c("remotes", "rcmdcheck", "rmarkdown", "knitr"))
           remotes::install_deps(dependencies = TRUE)
           if (!requireNamespace("randomForest", quietly = TRUE)) {
             install.packages("randomForest")
           }
         shell: Rscript {0}
+
+      - name: Install Pandoc
+        run: |
+          brew install pandoc
 
       - name: Debug installed packages
         run: |
