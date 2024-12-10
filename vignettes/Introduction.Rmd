@@ -55,6 +55,7 @@ head(merged_data)
 ## Step 2: Handle Missing Values
 
 The `impute_data` function handles missing values in the dataset using the following approaches:
+
 - **Linear Interpolation:** Missing values within a time series are imputed using linear interpolation (`zoo::na.approx`).
 - **Global Mean Imputation:** Remaining missing values, which cannot be imputed by interpolation, are replaced with the global mean for the corresponding variable.
 
@@ -69,6 +70,7 @@ head(imputed_data)
 ## Step 3: Run the Analysis
 
 Run the complete analysis workflow using the `run_analysis` function. This step includes:
+
 - Data preparation
 - PCA for dimensionality reduction
 - Training multiple models
@@ -108,5 +110,3 @@ print(evaluation_plot)
 ## Conclusion
 
 This vignette demonstrated the complete workflow for using `WorldbankAnalysis`. From fetching and preprocessing data to building and evaluating predictive models, the package simplifies the analytical workflow.
-
-```

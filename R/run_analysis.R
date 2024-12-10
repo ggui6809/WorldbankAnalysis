@@ -10,6 +10,12 @@
 #' @param pca_variance_threshold Variance threshold for PCA. Default is 0.95.
 #' @return A list containing evaluation metrics and the result plot.
 #' @export
+#' @importFrom dplyr select
+#' @importFrom caret createDataPartition preProcess train trainControl
+#' @importFrom Metrics rmse
+#' @importFrom stats cor predict
+#' @importFrom ggplot2 ggplot aes geom_point theme_minimal labs
+#' @importFrom tidyr pivot_longer
 run_analysis <- function(imputed_data, target_year, filter_vars, model_list, split_ratio = 0.8, pca_variance_threshold = 0.95) {
   prepared <- prepare_data(imputed_data, target_year, filter_vars)
   split <- split_data(prepared$X, prepared$Y, split_ratio)

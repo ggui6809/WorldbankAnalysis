@@ -20,7 +20,12 @@ Imports:
     Metrics,
     ggplot2,
     parallel,
-    zoo
+    zoo,
+    randomForest,
+    patchwork,
+    tibble,
+    magrittr,
+    data.table
 VignetteBuilder: knitr
 Suggests: knitr, rmarkdown
 URL: https://github.com/ggui6809/WorldbankAnalysis

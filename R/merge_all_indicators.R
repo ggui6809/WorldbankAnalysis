@@ -6,6 +6,9 @@
 #' @param num_cores Number of cores to use for parallel processing. Defaults to all available cores minus one.
 #' @return A list of tibbles with processed data for each indicator.
 #' @export
+#' @importFrom httr GET content status_code
+#' @importFrom dplyr bind_rows rename
+#' @importFrom parallel makeCluster clusterExport clusterEvalQ parLapply stopCluster detectCores
 fetch_and_process_indicators <- function(indicator_urls, num_cores = parallel::detectCores() - 1) {
   # Function to fetch paginated data
   fetch_paginated_data <- function(url) {
@@ -57,6 +60,7 @@ fetch_and_process_indicators <- function(indicator_urls, num_cores = parallel::d
 #' @param indicator_data List of tibbles containing processed indicator data.
 #' @return A single merged tibble with all indicators.
 #' @export
+#' @importFrom dplyr left_join
 merge_all_indicators <- function(indicator_data) {
   merged_data <- Reduce(function(x, y) {
     dplyr::left_join(x, y, by = c("country", "countryiso3code", "date"))

@@ -5,6 +5,9 @@
 #' @param url A URL for a World Bank API endpoint.
 #' @return A tibble containing the combined paginated data.
 #' @export
+#' @importFrom httr GET content status_code
+#' @importFrom dplyr bind_rows
+#' @importFrom tibble tibble
 fetch_paginated_data <- function(url) {
   page <- 1
   all_data <- list()

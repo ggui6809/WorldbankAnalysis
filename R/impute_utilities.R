@@ -5,6 +5,9 @@
 #' @param data A data frame in wide format with columns containing variable-year values.
 #' @return A data frame in long format with columns: `country`, `countryiso3code`, `variable`, `year`, and `value`.
 #' @export
+#' @importFrom tidyr pivot_longer
+#' @importFrom dplyr select
+#' @importFrom magrittr %>%
 reshape_to_long <- function(data) {
   data_long <- data %>%
     tidyr::pivot_longer(
@@ -27,6 +30,9 @@ reshape_to_long <- function(data) {
 #' @param data_long A long-format data frame with columns: `country`, `variable`, `year`, and `value`.
 #' @return A long-format data frame with missing values imputed.
 #' @export
+#' @importFrom dplyr group_by mutate ungroup arrange
+#' @importFrom zoo na.approx
+#' @importFrom magrittr %>%
 impute_long_data <- function(data_long) {
   data_long <- data_long %>%
     group_by(country, variable) %>%
@@ -50,6 +56,8 @@ impute_long_data <- function(data_long) {
 #' @param data_long A long-format data frame with columns: `country`, `variable`, `year`, and `value`.
 #' @return A wide-format data frame with variable-year columns.
 #' @export
+#' @importFrom tidyr pivot_wider
+#' @importFrom magrittr %>%
 reshape_to_wide <- function(data_long) {
   data_wide <- data_long %>%
     tidyr::pivot_wider(

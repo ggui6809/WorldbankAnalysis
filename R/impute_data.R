@@ -5,6 +5,7 @@
 #' @param data A wide-format data frame with variable-year columns.
 #' @return A wide-format data frame with missing values imputed.
 #' @export
+#' @importFrom dplyr select where
 impute_data <- function(data) {
   data <- data %>%
     select(where(~ mean(is.na(.)) < 0.5))  # Filter columns with less than 50% missing values

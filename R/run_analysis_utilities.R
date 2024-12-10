@@ -7,6 +7,8 @@
 #' @param filter_vars List of variable names to use as predictors.
 #' @return A list containing predictors (`X`) and target (`Y`).
 #' @export
+#' @importFrom dplyr select all_of where
+#' @importFrom magrittr %>%
 prepare_data <- function(data, target_year, filter_vars = NULL) {
   if (!is.null(filter_vars)) {
     filter_vars <- paste0(filter_vars, "_", target_year)
@@ -32,6 +34,7 @@ prepare_data <- function(data, target_year, filter_vars = NULL) {
 #' @param split_ratio The proportion of the data to use for training. Default is 0.8.
 #' @return A list containing training and testing datasets.
 #' @export
+#' @importFrom caret createDataPartition
 split_data <- function(X, Y, split_ratio = 0.8) {
   set.seed(123)
   train_index <- caret::createDataPartition(Y, p = split_ratio, list = FALSE)
@@ -51,6 +54,7 @@ split_data <- function(X, Y, split_ratio = 0.8) {
 #' @param variance_threshold The amount of variance to retain. Default is 0.95.
 #' @return A list containing the PCA model, transformed training data, and transformed testing data.
 #' @export
+#' @importFrom caret preProcess
 perform_pca <- function(X_train, X_test, variance_threshold = 0.95) {
   pca_model <- caret::preProcess(X_train, method = "pca", thresh = variance_threshold)
   X_train_pca <- predict(pca_model, X_train)
@@ -68,6 +72,7 @@ perform_pca <- function(X_train, X_test, variance_threshold = 0.95) {
 #' @param model_list A vector of model names to train (e.g., "lm", "rf", "svm", "gbm").
 #' @return A list of trained models.
 #' @export
+#' @importFrom caret train trainControl
 train_models <- function(X_train_pca, Y_train, model_list = c("lm", "rf", "svm", "gbm")) {
   train_data <- cbind(X_train_pca, life_expectancy = Y_train)
   control <- caret::trainControl(method = "cv", number = 5)  # 5-fold cross-validation
@@ -105,6 +110,8 @@ train_models <- function(X_train_pca, Y_train, model_list = c("lm", "rf", "svm",
 #' @param Y_test Actual target values for testing.
 #' @return A list containing evaluation metrics and predictions for each model.
 #' @export
+#' @importFrom Metrics rmse
+#' @importFrom stats cor predict
 evaluate_models <- function(models, X_test_pca, Y_test) {
   evaluate_model <- function(model, X_test, Y_test) {
     predictions <- predict(model, newdata = X_test)
@@ -135,6 +142,8 @@ evaluate_models <- function(models, X_test_pca, Y_test) {
 #' @param model_list A vector of model names to include in the plot.
 #' @return A ggplot object.
 #' @export
+#' @importFrom ggplot2 ggplot aes geom_point theme_minimal labs
+#' @importFrom tidyr pivot_longer
 plot_results <- function(Y_test, predictions_list, model_list) {
   test_results <- data.frame(Actual = Y_test)
 

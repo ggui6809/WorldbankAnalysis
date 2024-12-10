@@ -8,6 +8,8 @@
 #' @param end_year The end year for filtering the data. Default is 2022.
 #' @return A merged dataset containing all the processed indicators.
 #' @export
+#' @importFrom dplyr filter mutate group_by ungroup select arrange
+#' @importFrom tidyr pivot_longer pivot_wider
 fetch_merge_indicators <- function(indicator_urls, num_cores = 1, start_year = 2015, end_year = 2022) {
   # Fetch and process indicator data
   indicator_data <- fetch_and_process_indicators(indicator_urls, num_cores)

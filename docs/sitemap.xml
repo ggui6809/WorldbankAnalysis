@@ -1,0 +1,24 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/introduction.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/evaluate_models.html</loc></url>
+<url><loc>/reference/fetch_and_process_indicators.html</loc></url>
+<url><loc>/reference/fetch_merge_indicators.html</loc></url>
+<url><loc>/reference/fetch_paginated_data.html</loc></url>
+<url><loc>/reference/impute_data.html</loc></url>
+<url><loc>/reference/impute_long_data.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/merge_all_indicators.html</loc></url>
+<url><loc>/reference/perform_pca.html</loc></url>
+<url><loc>/reference/plot_results.html</loc></url>
+<url><loc>/reference/prepare_data.html</loc></url>
+<url><loc>/reference/reshape_to_long.html</loc></url>
+<url><loc>/reference/reshape_to_wide.html</loc></url>
+<url><loc>/reference/run_analysis.html</loc></url>
+<url><loc>/reference/split_data.html</loc></url>
+<url><loc>/reference/train_models.html</loc></url>
+</urlset>
+
