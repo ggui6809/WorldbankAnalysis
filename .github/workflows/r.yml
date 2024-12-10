@@ -32,10 +32,25 @@ jobs:
         with:
           r-version: ${{ matrix.r-version }}
 
+      - name: Install system dependencies
+        run: |
+          brew install gcc
+
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck"))
           remotes::install_deps(dependencies = TRUE)
+          if (!requireNamespace("caret", quietly = TRUE)) {
+            install.packages("caret")
+          }
+          if (!requireNamespace("randomForest", quietly = TRUE)) {
+            install.packages("randomForest")
+          }
+        shell: Rscript {0}
+
+      - name: Debug installed packages
+        run: |
+          installed.packages()[, c("Package", "Version")]
         shell: Rscript {0}
 
       - name: Check
