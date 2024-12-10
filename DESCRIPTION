@@ -26,7 +26,8 @@ Imports:
     tibble,
     magrittr,
     data.table
-VignetteBuilder: knitr
+BuildVignettes: false
+# VignetteBuilder: knitr
 Suggests: knitr, rmarkdown
 URL: https://github.com/ggui6809/WorldbankAnalysis
 BugReports: https://github.com/ggui6809/WorldbankAnalysis/issues
