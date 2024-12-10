@@ -30,7 +30,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "rcmdcheck", "rmarkdown", "knitr"))
+          install.packages(c("remotes", "kernlab", "rcmdcheck", "rmarkdown", "knitr"))
           remotes::install_deps(dependencies = TRUE)
           if (!requireNamespace("randomForest", quietly = TRUE)) {
             install.packages("randomForest")
