@@ -1,12 +1,13 @@
 Package: WorldbankAnalysis
-Title: What the Package Does (One Line, Title Case)
+Title: Tools for Fetching, Processing, and Analyzing World Bank Data
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
+    person("Guan", "Gui", email = "ggui2@jh.edu", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Description: The `WorldbankAnalysis` package provides tools to fetch, process, and analyze data from the World Bank API.
+    It includes functionality to handle missing data using linear interpolation and mean imputation, train and evaluate
+    predictive models, and visualize results.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
@@ -24,3 +25,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+URL: https://github.com/ggui6809/WorldbankAnalysis
+BugReports: https://github.com/ggui6809/WorldbankAnalysis/issues
