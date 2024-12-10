@@ -1,4 +1,4 @@
-# WorldbankAnalysis
+# WorldbankAnalysis R package
 
 The `WorldbankAnalysis` package provides tools for fetching, processing, and analyzing data from the World Bank API. It includes functionality to handle missing values and build predictive models using machine learning.
 
@@ -19,3 +19,12 @@ install.packages("devtools")
 
 # Install WorldbankAnalysis
 devtools::install_github("ggui6809/WorldbankAnalysis")
+```
+
+## Documentation
+
+For an introduction to using the `WorldbankAnalysis` package, check out the vignette:
+
+[Introduction to WorldbankAnalysis](https://ggui6809.github.io/WorldbankAnalysis/articles/introduction.html)
+
+This vignette provides an overview of the package's features and a step-by-step guide for fetching, processing, and analyzing World Bank data.
