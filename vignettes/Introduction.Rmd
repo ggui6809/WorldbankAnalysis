@@ -1,0 +1,112 @@
+---
+title: "Introduction to WorldbankAnalysis Package"
+author: "Your Name"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to WorldbankAnalysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+This vignette demonstrates how to use the `WorldbankAnalysis` to analyze World Bank data, handle missing values, and build predictive models.
+
+## Setup
+
+Load the package and required libraries.
+
+```{r setup, message=FALSE, warning=FALSE}
+library(WorldbankAnalysis)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(readr)
+library(readr)
+library(Metrics)
+library(ggplot2)
+library(parallel)
+library(zoo)
+```
+
+## Step 1: Fetch and Merge Data
+
+Use the `fetch_merge_indicators` function to fetch and merge World Bank data. Here, we specify a list of World Bank indicator URLs.
+
+```{r fetch-merge-data}
+# Define the URLs for World Bank indicators
+indicator_urls <- list(
+  "life_expectancy" = "https://api.worldbank.org/v2/country/all/indicator/SP.DYN.LE00.IN?format=json",
+  "inflation" = "https://api.worldbank.org/v2/country/all/indicator/FP.CPI.TOTL.ZG?format=json",
+  "gdp_per_capita" = "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.CD?format=json",
+  "undernourishment" = "https://api.worldbank.org/v2/country/all/indicator/SN.ITK.DEFC.ZS?format=json",
+  "health_expenditure" = "https://api.worldbank.org/v2/country/all/indicator/SH.XPD.CHEX.PC.CD?format=json",
+  "infant_mortality" = "https://api.worldbank.org/v2/country/all/indicator/SP.DYN.IMRT.IN?format=json"
+)
+
+# Fetch and merge data
+merged_data <- fetch_merge_indicators(indicator_urls = indicator_urls, num_cores = 4, start_year = 2015, end_year = 2022)
+
+# Display a preview of the merged data
+head(merged_data)
+```
+
+## Step 2: Handle Missing Values
+
+The `impute_data` function handles missing values in the dataset using the following approaches:
+- **Linear Interpolation:** Missing values within a time series are imputed using linear interpolation (`zoo::na.approx`).
+- **Global Mean Imputation:** Remaining missing values, which cannot be imputed by interpolation, are replaced with the global mean for the corresponding variable.
+
+```{r handle-missing-values}
+# Impute missing values
+imputed_data <- impute_data(merged_data)
+
+# Display a preview of the imputed data
+head(imputed_data)
+```
+
+## Step 3: Run the Analysis
+
+Run the complete analysis workflow using the `run_analysis` function. This step includes:
+- Data preparation
+- PCA for dimensionality reduction
+- Training multiple models
+- Evaluating models
+- Plotting predictions vs. actual values
+
+```{r run-analysis}
+# Run the analysis
+results <- run_analysis(
+  imputed_data = imputed_data,
+  target_year = 2021,
+  filter_vars = c("inflation", "gdp_per_capita", "health_expenditure", "infant_mortality", "undernourishment"),
+  model_list = c("lm", "rf", "svm", "gbm"),
+  split_ratio = 0.7,  # Use 70% of the data for training
+  pca_variance_threshold = 0.9  # Retain 90% of variance in PCA
+)
+
+# Extract evaluation results and plot
+evaluation_results <- results$evaluation
+evaluation_plot <- results$plot
+```
+
+### Model Evaluation
+
+```{r model-evaluation}
+# Display evaluation metrics
+evaluation_results
+```
+
+### Predictions vs. Actual Plot
+
+```{r prediction-plot, fig.width=8, fig.height=6}
+# Display the plot
+print(evaluation_plot)
+```
+
+## Conclusion
+
+This vignette demonstrated the complete workflow for using `WorldbankAnalysis`. From fetching and preprocessing data to building and evaluating predictive models, the package simplifies the analytical workflow.
+
+```
